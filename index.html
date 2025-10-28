@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FixMyAthens — Τεχνικός άμεσα στην Αθήνα</title>
+
+  <meta name="theme-color" content="#0f172a"/>
+  <link rel="manifest" href="/manifest.json">
+
+  <style>
+    :root {
+      --bg:#0f172a;
+      --surface:#111827;
+      --surface-soft:#1e2537;
+      --stroke:rgba(255,255,255,0.07);
+      --accent:#38bdf8;
+      --text-primary:#f8fafc;
+      --text-dim:#9ca3af;
+      --radius-lg:20px;
+      --radius-md:12px;
+      --font:-apple-system,BlinkMacSystemFont,"Inter",Roboto,"Helvetica Neue",Arial,sans-serif;
+      --ok-bg:#10b981;
+      --ok-text:#062017;
+      --wa-bg:#25D366;
+      --wa-text:#062017;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+
+    body{
+      background:radial-gradient(circle at 20% 20%,rgba(56,189,248,.18) 0%,rgba(15,23,42,0) 60%),var(--bg);
+      color:var(--text-primary);
+      font-family:var(--font);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.45;
+    }
+
+    .page{
+      max-width:1200px;
+      margin:0 auto;
+      padding:24px clamp(16px,2vw,32px) 80px;
+    }
+
+    header.navbar{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom:32px;
+    }
+
+    .brand-wrap{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-icon{
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      background:linear-gradient(150deg,#1f2937 0%,#0f172a 60%);
+      border:1px solid rgba(255,255,255,0.12);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:0.7rem;
+      font-weight:600;
+      color:var(--accent);
+      line-height:1.2;
+      text-align:center;
+    }
+
+    .brand-text-head{
+      font-size:1.05rem;
+      font-weight:600;
+      color:var(--text-primary);
+      letter-spacing:-0.03em;
+    }
+
+    .brand-text-sub{
+      font-size:0.8rem;
+      color:var(--text-dim);
+      line-height:1.3;
+    }
+
+    .actions-top{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .partner-btn{
+      background:transparent;
+      border:1px solid var(--stroke);
+      color:var(--text-primary);
+      border-radius:var(--radius-md);
+      font-size:0.75rem;
+      font-weight:500;
+      padding:10px 12px;
+      cursor:pointer;
+      line-height:1.2;
+    }
+    .partner-btn:active{scale:.98;}
+
+    .admin-bar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .pill{
+      background:rgba(255,255,255,0.03);
+      border:1px solid var(--stroke);
+      color:var(--text-dim);
+      border-radius:999px;
+      font-size:0.7rem;
+      padding:6px 10px;
+      line-height:1.2;
+      white-space:nowrap;
+    }
+
+    .admin-btn{
+      background:transparent;
+      border:1px solid var(--stroke);
+      color:var(--text-primary);
+      border-radius:var(--radius-md);
+      font-size:0.75rem;
+      font-weight:500;
+      padding:8px 12px;
+      cursor:pointer;
+      line-height:1.2;
+    }
+    .admin-btn:active{scale:.98;}
+
+    /* HERO LAYOUT */
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:24px;
+      margin-bottom:32px;
+    }
+    @media(min-width:900px){
+      .hero{
+        grid-template-columns:minmax(0,1fr) 400px;
+      }
+    }
+
+    .hero-copy h1{
+      font-size:clamp(1.4rem,1vw,1.6rem);
+      font-weight:600;
+      color:var(--text-primary);
+      letter-spacing:-0.04em;
+      line-height:1.2;
+      margin-bottom:12px;
+    }
+
+    .hero-copy .subtitle{
+      font-size:0.9rem;
+      color:var(--text-dim);
+      max-width:600px;
+      line-height:1.5;
+    }
+
+    .hero-highlights{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:20px;
+    }
+
+    .chip{
+      background:rgba(56,189,248,0.08);
+      color:var(--accent);
+      border:1px solid rgba(56,189,248,0.4);
+      border-radius:var(--radius-md);
+      font-size:0.7rem;
+      font-weight:500;
+      padding:6px 10px;
+      line-height:1.2;
+      white-space:nowrap;
+    }
+
+    .chip.dim{
+      background:rgba(255,255,255,0.03);
+      color:var(--text-dim);
+      border:1px solid var(--stroke);
+    }
+
+    /* APP CARD / PANELS */
+    .app-card{
+      background:linear-gradient(145deg,#1f2535 0%,#111827 50%);
+      border-radius:var(--radius-lg);
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 40px 160px rgba(0,0,0,0.9);
+      padding:20px 20px 16px;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .section-title{
+      font-size:0.9rem;
+      font-weight:600;
+      color:var(--text-primary);
+      letter-spacing:-0.03em;
+      display:flex;
+      flex-direction:column;
+      line-height:1.3;
+    }
+    .section-desc{
+      font-size:0.75rem;
+      font-weight:400;
+      color:var(--text-dim);
+      line-height:1.4;
+    }
+
+    .btn-main{
+      width:100%;
+      background:var(--accent);
+      color:#06121f;
+      border:none;
+      border-radius:var(--radius-md);
+      font-weight:600;
+      font-size:0.9rem;
+      padding:12px 14px;
+      cursor:pointer;
+      text-align:center;
+    }
+    .btn-main:active{scale:.98;}
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    /* GENERIC PANEL */
+    .panel{
+      background:rgba(15,23,42,0.6);
+      border-radius:var(--radius-md);
+      border:1px solid var(--stroke);
+      padding:16px;
+    }
+
+    label{
+      font-size:0.75rem;
+      font-weight:500;
+      color:var(--text-primary);
+      margin-bottom:4px;
+      display:block;
+      letter-spacing:-0.03em;
+    }
+
+    select,
+    input,
+    textarea{
+      width:100%;
+      background:#0b1118;
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:var(--radius-md);
+      color:var(--text-primary);
+      font-size:0.85rem;
+      line-height:1.4;
+      padding:12px;
+      font-family:var(--font);
+      outline:none;
+    }
+
+    select:focus,
+    input:focus,
+    textarea:focus{
+      border:1px solid var(--accent);
+      box-shadow:0 0 0 4px rgba(56,189,248,0.18);
+    }
+
+    .form-row-inline{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .note{
+      font-size:0.7rem;
+      color:var(--text-dim);
+      line-height:1.4;
+    }
+
+    .btn-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .btn-secondary{
+      flex:1;
+      background:transparent;
+      border:1px solid var(--stroke);
+      color:var(--text-primary);
+      border-radius:var(--radius-md);
+      font-weight:500;
+      font-size:0.8rem;
+      padding:12px;
+      text-align:center;
+      cursor:pointer;
+      line-height:1.2;
+    }
+    .btn-secondary:active{scale:.98;}
+
+    .btn-accent{
+      flex:1;
+      background:var(--accent);
+      border:none;
+      color:#06121f;
+      border-radius:var(--radius-md);
+      font-weight:600;
+      font-size:0.8rem;
+      padding:12px;
+      text-align:center;
+      cursor:pointer;
+      line-height:1.2;
+    }
+    .btn-accent:active{scale:.98;}
+
+    /* RESULTS LIST */
+    .result-list{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:8px;
+    }
+
+    .result-item{
+      background:rgba(255,255,255,0.02);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius-md);
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    @media(min-width:480px){
+      .result-item{
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:flex-start;
+      }
+    }
+
+    .result-left-title{
+      font-size:0.9rem;
+      font-weight:600;
+      color:var(--text-primary);
+      letter-spacing:-0.03em;
+      margin-bottom:4px;
+    }
+
+    .result-left-sub{
+      font-size:0.75rem;
+      color:var(--text-dim);
+      line-height:1.4;
+    }
+
+    .coverage{
+      font-size:0.7rem;
+      color:var(--text-dim);
+      margin-top:6px;
+      line-height:1.4;
+    }
+
+    .action-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      min-width:180px;
+    }
+
+    .mini-btn{
+      flex:1;
+      background:#1e293b;
+      border:1px solid var(--stroke);
+      color:var(--text-primary);
+      font-size:0.75rem;
+      font-weight:600;
+      line-height:1.2;
+      border-radius:var(--radius-md);
+      padding:10px 12px;
+      cursor:pointer;
+      text-align:center;
+    }
+    .mini-btn.call{
+      background:var(--ok-bg);
+      border:1px solid var(--ok-bg);
+      color:var(--ok-text);
+    }
+    .mini-btn.wa{
+      background:var(--wa-bg);
+      border:1px solid var(--wa-bg);
+      color:var(--wa-text);
+    }
+    .mini-btn:active{scale:.98;}
+
+    .empty-state{
+      font-size:0.8rem;
+      color:var(--text-dim);
+      background:rgba(255,255,255,0.02);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius-md);
+      padding:16px;
+      line-height:1.5;
+    }
+
+    .success-box{
+      background:rgba(16,185,129,0.08);
+      border:1px solid rgba(16,185,129,0.4);
+      color:#6ee7b7;
+      border-radius:var(--radius-md);
+      font-size:0.8rem;
+      line-height:1.5;
+      padding:16px;
+    }
+
+    /* PARTNER LOGIN / DASHBOARD */
+    .partner-card{
+      background:linear-gradient(145deg,#1f2535 0%,#111827 50%);
+      border-radius:var(--radius-lg);
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 40px 160px rgba(0,0,0,0.9);
+      padding:20px;
+      max-width:400px;
+      width:100%;
+    }
+
+    .partner-head{
+      font-size:0.9rem;
+      font-weight:600;
+      color:var(--text-primary);
+      letter-spacing:-0.03em;
+      line-height:1.3;
+      margin-bottom:6px;
+    }
+    .partner-sub{
+      font-size:0.75rem;
+      color:var(--text-dim);
+      line-height:1.4;
+      margin-bottom:16px;
+    }
+
+    .dash-box{
+      background:rgba(15,23,42,0.6);
+      border-radius:var(--radius-md);
+      border:1px solid var(--stroke);
+      padding:16px;
+      margin-top:16px;
+    }
+    .dash-row{
+      display:flex;
+      justify-content:space-between;
+      font-size:0.8rem;
+      color:var(--text-primary);
+      margin-bottom:8px;
+      line-height:1.4;
+    }
+    .dash-row span:last-child{
+      color:var(--accent);
+      font-weight:600;
+    }
+    .dash-small{
+      font-size:0.7rem;
+      color:var(--text-dim);
+      line-height:1.4;
+      margin-top:12px;
+    }
+
+    footer.footer{
+      margin-top:48px;
+      color:var(--text-dim);
+      font-size:0.7rem;
+      line-height:1.5;
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,0.05);
+      padding-top:24px;
+      max-width:700px;
+    }
+
+    /* layout blocks visibility */
+    .hero-side > * { display:none; } /* default hidden; we toggle in JS */
+    #card-step1, #card-step2, #card-step3, #card-step4 { display:none; }
+    #partnerLoginCard, #partnerDashCard { display:none; }
+
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- NAV / HEADER -->
+    <header class="navbar">
+      <div class="brand-wrap">
+        <div class="brand-icon">
+          🔧<br>FMA
+        </div>
+        <div>
+          <div class="brand-text-head">FixMyAthens</div>
+          <div class="brand-text-sub">Τεχνικός άμεσα σε Αθήνα & προάστια</div>
+        </div>
+      </div>
+
+      <div class="actions-top">
+        <!-- κουμπί για μάστορα -->
+        <button class="partner-btn" id="openPartnerBtn">Είμαι τεχνικός</button>
+
+        <!-- admin mode (CSV leads) -->
+        <div id="adminBar" class="admin-bar" style="display:none;">
+          <div class="pill">5€ / δουλειά (pay-per-lead)</div>
+          <button class="admin-btn" id="exportCsvBtn">Λήψη Leads (CSV)</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+      <!-- LEFT SIDE: marketing copy -->
+      <div class="hero-copy" id="mainCopyBlock">
+        <h1>Χρειάζεσαι άμεσα τεχνικό; 👇</h1>
+        <div class="subtitle">
+          Διάλεξε ειδικότητα, γράψε το πρόβλημα, και θα δεις
+          διαθέσιμους τεχνικούς στην περιοχή σου. Τους καλείς ή
+          τους στέλνεις WhatsApp άμεσα. Χωρίς μεσάζοντες. Χωρίς “θα σε πάρω”.
+        </div>
+
+        <div class="hero-highlights">
+          <div class="chip">Κλήση κατευθείαν στον τεχνικό</div>
+          <div class="chip">WhatsApp με 1 πάτημα</div>
+          <div class="chip dim">Αθήνα / Νότια / Κέντρο</div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE: app / partner views -->
+      <div class="hero-side" style="display:flex;flex-direction:column;gap:24px;">
+
+        <!-- STEP 1 -->
+        <div id="card-step1" class="app-card">
+          <div class="section-head">
+            <div class="section-title">
+              <span>1. Τι μάστορα χρειάζεσαι;</span>
+              <span class="section-desc">Επίλεξε υπηρεσία</span>
+            </div>
+          </div>
+
+          <div class="two-col" id="serviceGrid"></div>
+
+          <button class="btn-main" id="toFormBtn">Συνέχεια</button>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="card-step2" class="app-card">
+          <div class="section-head">
+            <div class="section-title">
+              <span>2. Περιέγραψε το πρόβλημα</span>
+              <span class="section-desc">Θα σου δείξουμε ποιοι είναι διαθέσιμοι</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <label>Ειδικότητα</label>
+            <select id="serviceSelect"></select>
+
+            <label>Περιοχή / Γειτονιά</label>
+            <input id="areaInput" placeholder="π.χ. Παγκράτι" />
+
+            <label>Τι έχει συμβεί;</label>
+            <textarea id="descInput" rows="3" placeholder="Π.χ. τρέχει νερό από τον νιπτήρα"></textarea>
+
+            <div class="form-row-inline">
+              <div style="flex:1;min-width:120px;">
+                <label>Πότε το θέλεις;</label>
+                <select id="urgencySelect">
+                  <option>Σήμερα (έκτακτο)</option>
+                  <option>Αύριο</option>
+                  <option>Όποτε μπορείτε</option>
+                </select>
+              </div>
+              <div style="flex:1;min-width:120px;">
+                <label>Τηλέφωνο</label>
+                <input id="phoneInput" placeholder="69..." />
+              </div>
+            </div>
+
+            <div class="note" style="margin-top:4px;">
+              Με την αποστολή, συμφωνείς να σταλούν τα στοιχεία σου στον τεχνικό για να επικοινωνήσει μαζί σου.
+            </div>
+
+            <div class="btn-row">
+              <button class="btn-accent" id="findBtn">Βρες τεχνικό τώρα</button>
+              <button class="btn-secondary" id="backHomeBtn">Πίσω</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div id="card-step3" class="app-card">
+          <div class="section-head">
+            <div class="section-title">
+              <span>3. Διαθέσιμοι τεχνικοί</span>
+              <span class="section-desc">Κάλεσέ τους ή στείλε WhatsApp</span>
+            </div>
+            <button class="btn-secondary" id="backToFormBtn" style="flex-shrink:0;font-size:0.7rem;padding:8px 10px;line-height:1.2;">
+              Πίσω
+            </button>
+          </div>
+
+          <div id="mastersList" class="result-list"></div>
+
+          <div id="noMasters" class="empty-state" style="display:none;">
+            Δεν βρέθηκαν τεχνικοί για αυτή την ειδικότητα /
+            περιοχή αυτή τη στιγμή.
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div id="card-step4" class="app-card">
+          <div class="section-head">
+            <div class="section-title">
+              <span>Εστάλη ✔</span>
+              <span class="section-desc">Ο τεχνικός έχει τα στοιχεία σου</span>
+            </div>
+          </div>
+
+          <div class="success-box">
+            Το αίτημά σου στάλθηκε στον τεχνικό. Θα σε καλέσει σύντομα.
+            Για πιο άμεσο αποτέλεσμα, μπορείς πάντα να πατήσεις “ΚΑΛΕΣΕ”.
+          </div>
+
+          <button class="btn-main" id="homeFromSuccess" style="margin-top:12px;">
+            Επιστροφή στην αρχική
+          </button>
+        </div>
+
+        <!-- PARTNER LOGIN CARD -->
+        <div id="partnerLoginCard" class="partner-card">
+          <div class="partner-head">Σύνδεση τεχνικού</div>
+          <div class="partner-sub">
+            Γράψε τον κωδικό συνεργάτη που σου δώσαμε (π.χ. Μ001).
+          </div>
+
+          <div class="panel" style="margin-bottom:16px;">
+            <label>Κωδικός συνεργάτη</label>
+            <input id="partnerCodeInput" placeholder="π.χ. M001" />
+            <div class="btn-row" style="margin-top:12px;">
+              <button class="btn-accent" id="partnerLoginBtn">Είσοδος</button>
+              <button class="btn-secondary" id="partnerBackBtn">Πίσω</button>
+            </div>
+          </div>
+
+          <div class="note">
+            Δεν έχεις κωδικό; Επικοινώνησε για ένταξη.
+            Πληρώνεις μόνο 5€/δουλειά (pay-per-lead).
+          </div>
+        </div>
+
+        <!-- PARTNER DASHBOARD CARD -->
+        <div id="partnerDashCard" class="partner-card">
+          <div class="partner-head" id="dashName">
+            Καλώς ήρθες,
+          </div>
+          <div class="partner-sub" id="dashAreas">
+            Περιοχές:
+          </div>
+
+          <div class="dash-box">
+            <div class="dash-row">
+              <span>Διαθεσιμότητα</span>
+              <span id="dashAvail">-</span>
+            </div>
+            <div class="dash-row">
+              <span>Συνολικά leads</span>
+              <span id="dashLeadsCount">0</span>
+            </div>
+            <div class="dash-row">
+              <span>Οφειλή προς FixMyAthens</span>
+              <span id="dashOwe">0€</span>
+            </div>
+            <div class="dash-small">
+              Μοντέλο: 5€ ανά lead (πληρωμή στο τέλος της εβδομάδας).
+            </div>
+          </div>
+
+          <div class="btn-row" style="margin-top:16px;">
+            <button class="btn-secondary" id="partnerLogoutBtn">Αποσύνδεση</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      FixMyAthens © 2025 — Αθήνα, Ελλάδα<br><br>
+      Με τη χρήση της υπηρεσίας συμφωνείς ότι τα στοιχεία σου μπορούν
+      να διαβιβαστούν σε συνεργαζόμενο τεχνικό για σκοπούς εξυπηρέτησης.
+      Οι τεχνικοί πληρώνουν 5€ ανά lead (pay-per-lead).
+    </footer>
+  </div>
+
+  <script>
+  /* ========= CONFIG ========= */
+
+  // υπηρεσίες
+  const SERVICES = [
+    { label:"Υδραυλικός",        icon:"🚰 Υδραυλικός" },
+    { label:"Ηλεκτρολόγος",      icon:"💡 Ηλεκτρολόγος" },
+    { label:"Κλειδαράς",         icon:"🔑 Κλειδαράς" },
+    { label:"Ψυκτικός (A/C)",    icon:"❄️ Ψυκτικός" },
+    { label:"Γενικός μάστορας",  icon:"🛠️ Γενικός" },
+    { label:"Άλλο",              icon:"🔧 Άλλο" }
+  ];
+
+  /*
+    Μάστορες:
+    - id: μοναδικό
+    - partnerCode: ο κωδικός συνεργάτη που θα δίνεις στον μάστορα (π.χ. "M001")
+    - name: όνομα που θα βλέπει ο πελάτης
+    - type: ειδικότητα (μία από τις SERVICES ή "Γενικός μάστορας")
+    - areas: περιοχές που καλύπτει
+    - phone / whatsapp: 69...
+    - availability: π.χ. "Σήμερα", "Αύριο"
+  */
+  const MASTORES = [
+    // Παράδειγμα μορφής (σβήστο πριν βγεις live αν δεν είναι πραγματικός άνθρωπος)
+    // {
+    //   id:"m001",
+    //   partnerCode:"M001",
+    //   name:"Γιώργος Παράδειγμα",
+    //   type:"Υδραυλικός",
+    //   areas:["Παγκράτι","Νέα Σμύρνη"],
+    //   phone:"6900000000",
+    //   whatsapp:"6900000000",
+    //   availability:"Σήμερα"
+    // }
+  ];
+
+  /* ========= DOM refs ========= */
+
+  // main flow blocks
+  const mainCopyBlock    = document.getElementById('mainCopyBlock');
+  const cardStep1        = document.getElementById('card-step1');
+  const cardStep2        = document.getElementById('card-step2');
+  const cardStep3        = document.getElementById('card-step3');
+  const cardStep4        = document.getElementById('card-step4');
+
+  // partner (μάστορας) blocks
+  const partnerLoginCard = document.getElementById('partnerLoginCard');
+  const partnerDashCard  = document.getElementById('partnerDashCard');
+
+  // nav buttons
+  const openPartnerBtn   = document.getElementById('openPartnerBtn');
+
+  // step1
+  const serviceGrid      = document.getElementById('serviceGrid');
+  const toFormBtn        = document.getElementById('toFormBtn');
+
+  // step2
+  const serviceSelect    = document.getElementById('serviceSelect');
+  const areaInput        = document.getElementById('areaInput');
+  const descInput        = document.getElementById('descInput');
+  const urgencySelect    = document.getElementById('urgencySelect');
+  const phoneInput       = document.getElementById('phoneInput');
+  const findBtn          = document.getElementById('findBtn');
+  const backHomeBtn      = document.getElementById('backHomeBtn');
+
+  // step3
+  const mastersList      = document.getElementById('mastersList');
+  const noMasters        = document.getElementById('noMasters');
+  const backToFormBtn    = document.getElementById('backToFormBtn');
+
+  // step4
+  const homeFromSuccess  = document.getElementById('homeFromSuccess');
+
+  // partner login elements
+  const partnerCodeInput = document.getElementById('partnerCodeInput');
+  const partnerLoginBtn  = document.getElementById('partnerLoginBtn');
+  const partnerBackBtn   = document.getElementById('partnerBackBtn');
+  const partnerLogoutBtn = document.getElementById('partnerLogoutBtn');
+
+  // partner dashboard fields
+  const dashName         = document.getElementById('dashName');
+  const dashAreas        = document.getElementById('dashAreas');
+  const dashAvail        = document.getElementById('dashAvail');
+  const dashLeadsCount   = document.getElementById('dashLeadsCount');
+  const dashOwe          = document.getElementById('dashOwe');
+
+  // admin mode
+  const adminBar         = document.getElementById('adminBar');
+  const exportCsvBtn     = document.getElementById('exportCsvBtn');
+
+  /* ========= Helpers: leads storage ========= */
+
+  function getLeads(){
+    try{
+      const raw = localStorage.getItem('fixmyathens_leads');
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){
+      return [];
+    }
+  }
+  function saveLeads(arr){
+    localStorage.setItem('fixmyathens_leads', JSON.stringify(arr));
+  }
+
+  /* ========= View control =========
+     showView(mode):
+     mode = "client-step1" | "client-step2" | "client-results" | "client-success"
+          | "partner-login" | "partner-dash"
+  */
+  function showView(mode){
+    // κρύψε όλα
+    mainCopyBlock.style.display    = 'none';
+    cardStep1.style.display        = 'none';
+    cardStep2.style.display        = 'none';
+    cardStep3.style.display        = 'none';
+    cardStep4.style.display        = 'none';
+    partnerLoginCard.style.display = 'none';
+    partnerDashCard.style.display  = 'none';
+
+    if(mode.startsWith('client')){
+      mainCopyBlock.style.display = '';
+    }
+
+    if(mode==="client-step1") cardStep1.style.display = '';
+    if(mode==="client-step2") cardStep2.style.display = '';
+    if(mode==="client-results") cardStep3.style.display = '';
+    if(mode==="client-success") cardStep4.style.display = '';
+
+    if(mode==="partner-login") partnerLoginCard.style.display = '';
+    if(mode==="partner-dash")  partnerDashCard.style.display  = '';
+  }
+
+  /* ========= UI INIT ========= */
+
+  function initUI(){
+    // γεμίζω τα tiles υπηρεσιών (step1)
+    SERVICES.forEach(s=>{
+      const tile = document.createElement('div');
+      tile.className = 'panel';
+      tile.style.cursor = 'pointer';
+      tile.innerHTML = `
+        <div style="font-size:.8rem;font-weight:600;color:var(--text-primary);letter-spacing:-0.03em;">
+          ${s.icon}
+        </div>
+        <div style="font-size:.7rem;color:var(--text-dim);line-height:1.4;margin-top:4px;">
+          Επίλεξε και συνέχισε
+        </div>
+      `;
+      tile.onclick = ()=>{
+        serviceSelect.value = s.label;
+        showView('client-step2');
+      };
+      serviceGrid.appendChild(tile);
+    });
+
+    // γεμίζω dropdown ειδικότητας (step2)
+    SERVICES.forEach(s=>{
+      const opt = document.createElement('option');
+      opt.value = s.label;
+      opt.textContent = s.label;
+      serviceSelect.appendChild(opt);
+    });
+
+    // κουμπιά πλοήγησης πελάτη
+    toFormBtn.onclick        = ()=> showView('client-step2');
+    backHomeBtn.onclick      = ()=> showView('client-step1');
+    backToFormBtn.onclick    = ()=> showView('client-step2');
+    homeFromSuccess.onclick  = ()=> showView('client-step1');
+    findBtn.onclick          = onFind;
+
+    // κουμπιά μάστορα
+    openPartnerBtn.onclick   = ()=> {
+      // καθάρισε input
+      partnerCodeInput.value = "";
+      showView('partner-login');
+    };
+    partnerBackBtn.onclick   = ()=> showView('client-step1');
+    partnerLoginBtn.onclick  = onPartnerLogin;
+    partnerLogoutBtn.onclick = ()=> {
+      localStorage.removeItem('fixmyathens_partner');
+      showView('partner-login');
+    };
+
+    // admin mode query (?admin=1)
+    const params = new URLSearchParams(location.search);
+    if(params.get('admin')==='1'){
+      adminBar.style.display='flex';
+    }
+    exportCsvBtn.onclick = exportLeadsCsv;
+
+    // αν υπάρχει αποθηκευμένος συνεργάτης -> δείξε dashboard κατευθείαν
+    const savedPartner = getSavedPartner();
+    if(savedPartner){
+      updatePartnerDash(savedPartner);
+      showView('partner-dash');
+    }else{
+      showView('client-step1');
+    }
+  }
+
+  /* ========= Πελάτης: εύρεση τεχνικών ========= */
+
+  function onFind(e){
+    e?.preventDefault?.();
+
+    const service = serviceSelect.value.trim();
+    const area    = areaInput.value.trim();
+    const desc    = descInput.value.trim();
+    const urg     = urgencySelect.value.trim();
+    const phone   = phoneInput.value.trim();
+
+    if(!service || !area || !desc || !phone){
+      alert("Συμπλήρωσε όλα τα πεδία.");
+      return;
+    }
+
+    // φιλτράρισμα μαστόρων
+    const matches = MASTORES.filter(m=>{
+      const typeOk =
+        m.type === service ||
+        (service==="Άλλο" && m.type==="Γενικός μάστορας");
+      const areaOk = m.areas.some(
+        a => a.trim().toLowerCase() === area.toLowerCase()
+      );
+      return typeOk && areaOk;
+    });
+
+    renderResults(matches, {
+      service,
+      area,
+      desc,
+      urgency: urg,
+      phone
+    });
+  }
+
+  function renderResults(list, reqData){
+    mastersList.innerHTML = '';
+
+    if(!list.length){
+      noMasters.style.display='';
+    }else{
+      noMasters.style.display='none';
+    }
+
+    list.forEach(m=>{
+      const item = document.createElement('div');
+      item.className = 'result-item';
+
+      const left = document.createElement('div');
+      left.innerHTML = `
+        <div class="result-left-title">${m.name}</div>
+        <div class="result-left-sub">${m.type} · ${m.availability || "Διαθεσιμότητα;"}</div>
+        <div class="coverage">Καλύπτει: ${m.areas.join(', ')}</div>
+      `;
+
+      const right = document.createElement('div');
+      right.className = 'action-row';
+
+      const callBtn = document.createElement('button');
+      callBtn.className = 'mini-btn call';
+      callBtn.textContent = 'ΚΑΛΕΣΕ';
+      callBtn.onclick = ()=>{
+        recordLead(m, reqData, 'call');
+        window.location.href = `tel:${m.phone}`;
+      };
+
+      const waBtn = document.createElement('button');
+      waBtn.className = 'mini-btn wa';
+      waBtn.textContent = 'WHATSAPP';
+      waBtn.onclick = ()=>{
+        recordLead(m, reqData, 'whatsapp');
+        const msg =
+`Γεια σου, σε βρήκα από το FixMyAthens.
+Έχω το εξής θέμα: ${reqData.desc}
+Περιοχή: ${reqData.area}
+Τηλ: ${reqData.phone}`;
+        const encoded = encodeURIComponent(msg);
+        window.open(
+          `https://wa.me/30${m.whatsapp}?text=${encoded}`,
+          '_blank'
+        );
+      };
+
+      right.appendChild(callBtn);
+      right.appendChild(waBtn);
+
+      item.appendChild(left);
+      item.appendChild(right);
+
+      mastersList.appendChild(item);
+    });
+
+    showView('client-results');
+  }
+
+  function recordLead(master, reqData, channel){
+    const leads = getLeads();
+    leads.push({
+      id:Date.now().toString(),
+      ts:new Date().toISOString(),
+      masterId:master.id || null,
+      masterName:master.name || null,
+      partnerCode:master.partnerCode || null,
+      masterPhone:master.phone || null,
+      channel,
+      service:reqData.service,
+      area:reqData.area,
+      desc:reqData.desc,
+      urgency:reqData.urgency,
+      clientPhone:reqData.phone
+    });
+    saveLeads(leads);
+
+    showView('client-success');
+  }
+
+  /* ========= Admin CSV ========= */
+
+  function exportLeadsCsv(){
+    const leads = getLeads();
+    if(!leads.length){
+      alert("Δεν υπάρχουν leads ακόμα.");
+      return;
+    }
+
+    const headers = [
+      "id","ts","masterId","masterName","partnerCode","masterPhone",
+      "channel","service","area","desc","urgency","clientPhone"
+    ];
+
+    const rows = leads.map(l =>
+      headers.map(h=> JSON.stringify(l[h] ?? "") ).join(',')
+    );
+
+    const csv = [headers.join(',')].concat(rows).join('\r\n');
+    const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `fixmyathens_leads_${new Date().toISOString().slice(0,19).replace(/[:T]/g,'-')}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  /* ========= Partner login (light mode) ========= */
+
+  function getSavedPartner(){
+    try{
+      const raw = localStorage.getItem('fixmyathens_partner');
+      return raw ? JSON.parse(raw) : null;
+    }catch(e){
+      return null;
+    }
+  }
+  function savePartner(p){
+    localStorage.setItem('fixmyathens_partner', JSON.stringify(p));
+  }
+
+  function onPartnerLogin(){
+    const code = partnerCodeInput.value.trim();
+    if(!code){
+      alert("Βάλε τον κωδικό συνεργάτη σου.");
+      return;
+    }
+    // Βρες μάστορα με αυτό το partnerCode
+    const m = MASTORES.find(x => (x.partnerCode||"").toLowerCase() === code.toLowerCase());
+    if(!m){
+      alert("Λάθος κωδικός ή δεν έχεις ενεργό προφίλ.");
+      return;
+    }
+    savePartner({ partnerCode:m.partnerCode });
+    updatePartnerDash({ partnerCode:m.partnerCode });
+    showView('partner-dash');
+  }
+
+  function updatePartnerDash(saved){
+    // saved.partnerCode -> φέρνουμε το προφίλ
+    const m = MASTORES.find(x => x.partnerCode === saved.partnerCode);
+    if(!m){
+      dashName.textContent = "Δεν βρέθηκε προφίλ.";
+      dashAreas.textContent = "";
+      dashAvail.textContent = "-";
+      dashLeadsCount.textContent = "0";
+      dashOwe.textContent = "0€";
+      return;
+    }
+
+    dashName.textContent  = `Καλώς ήρθες, ${m.name}`;
+    dashAreas.textContent = `Περιοχές: ${m.areas.join(', ')}`;
+    dashAvail.textContent = m.availability || "-";
+
+    // Υπολογισμός leads για αυτόν τον μάστορα
+    const allLeads = getLeads();
+    const myLeads  = allLeads.filter(l => l.partnerCode === m.partnerCode);
+    const count    = myLeads.length;
+    dashLeadsCount.textContent = String(count);
+
+    const owe = count * 5; // 5€/lead
+    dashOwe.textContent = owe + "€";
+  }
+
+  /* ========= Service worker register ========= */
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .catch(err => console.log('SW registration failed', err));
+  }
+
+  /* ========= INIT ========= */
+
+  initUI();
+  </script>
+</body>
+</html>
